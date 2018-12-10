@@ -18,6 +18,7 @@ public class Product {
     public String pDescription;
     public double pPrice;
     public int pQty;
+//    public String pImg;
 
 
     public String getpId() {
@@ -68,6 +69,12 @@ public class Product {
         this.pQty = pQty;
     }
 
-
+//    public String getImg() {
+//        return Img;
+//    }
+//
+//    public void setImg(String img) {
+//        Img = img;
+//    }
 
 }
