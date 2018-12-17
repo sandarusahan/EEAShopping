@@ -1,4 +1,4 @@
-package com.apiit.eeashopping.API;
+package com.apiit.eeashopping.Controllers;
 
 import com.apiit.eeashopping.DB.ProductRepository;
 import com.apiit.eeashopping.Model.Product;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/product")
-public class Controller {
+public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
