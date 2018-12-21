@@ -20,24 +20,36 @@ public class ProductController {
 
         return product;
     }
-//    public @ResponseBody Product addNewProduct(@RequestParam String name, @RequestParam String category, @RequestParam String desc, @RequestParam double price, @RequestParam int qty){
-//        Product product = new Product();
-//
-//        product.setpName(name);
-//        product.setpCategory(category);
-//        product.setpPrice(price);
-//        product.setpDescription(desc);
-//        product.setpQty(qty);
-//
-//        productRepository.save(product);
-//        System.out.println(name + " is added");
-//
-//        return product;
-//    }
 
-    @GetMapping(path = "/getAll")
+
+    @GetMapping(path = "/all")
     public @ResponseBody Iterable<Product> getAllProducts(){
         System.out.println("Fetching all products");
         return productRepository.findAll();
+    }
+
+    @GetMapping(path = "/{pid}")
+    public Product getProduct(@PathVariable String pid){
+        System.out.println("Fetching all products");
+        return productRepository.findById(pid).get();
+    }
+
+    @PutMapping
+    public Product updateProduct(@RequestBody Product product){
+
+        productRepository.save(product);
+        System.out.println(product.pName + " is updated");
+
+        return product;
+    }
+
+    @DeleteMapping("/{pid}")
+    public String deleteProduct(@PathVariable String pid){
+
+        Product p = productRepository.findById(pid).get();
+        productRepository.deleteById(pid);
+        System.out.println(p.pName + " is deleted");
+
+        return "Deleted";
     }
 }
