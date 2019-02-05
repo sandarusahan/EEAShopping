@@ -16,7 +16,7 @@ public class ProductController {
     public Product addNewProduct(@RequestBody Product product){
 
         productRepository.save(product);
-        System.out.println(product.pName + " is added");
+        System.out.println(product.getpName() + " is added");
 
         return product;
     }
@@ -38,7 +38,7 @@ public class ProductController {
     public Product updateProduct(@RequestBody Product product){
 
         productRepository.save(product);
-        System.out.println(product.pName + " is updated");
+        System.out.println(product.getpName() + " is updated");
 
         return product;
     }
@@ -48,7 +48,7 @@ public class ProductController {
 
         Product p = productRepository.findById(pid).get();
         productRepository.deleteById(pid);
-        System.out.println(p.pName + " is deleted");
+        System.out.println(p.getpName() + " is deleted");
 
         return "Deleted";
     }

@@ -11,14 +11,15 @@ public class Product {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    public String pId;
+    private String pId;
 
-    public String pName;
-    public String pCategory;
-    public String pDescription;
-    public double pPrice;
-    public int pQty;
-    public String pImg;
+    private String pName;
+    private String pCategory;
+    private String pDescription;
+    private double pPrice;
+    private int pQty;
+    private String pImg;
+    private boolean isActive;
 
 
     public String getpId() {
@@ -77,4 +78,19 @@ public class Product {
         pImg = img;
     }
 
+    public String getpImg() {
+        return pImg;
+    }
+
+    public void setpImg(String pImg) {
+        this.pImg = pImg;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
