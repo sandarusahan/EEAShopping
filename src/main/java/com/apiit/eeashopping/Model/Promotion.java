@@ -1,22 +1,33 @@
 package com.apiit.eeashopping.Model;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Calendar;
+import java.util.Date;
 
+@Entity
 public class Promotion {
+
 
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "promo_id")
     private String promoid;
 
     private double percentage;
     private int duration;
-    private String pid;
-    private String  category;
-    private String promoname;
+    private String promoName;
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private Date startDate;
+
+    private Date endDate = handleEndDate();
+
+
 
     public String getPromoid() {
         return promoid;
@@ -42,27 +53,34 @@ public class Promotion {
         this.duration = duration;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getPromoname() {
-        return promoname;
+        return promoName;
     }
 
     public void setPromoname(String promoname) {
-        this.promoname = promoname;
+        this.promoName = promoname;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startedat) {
+        this.startDate = startedat;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndedate(Date endedat) {
+        this.endDate = endedat;
+    }
+
+    Date handleEndDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, duration);
+        return cal.getTime();
     }
 }

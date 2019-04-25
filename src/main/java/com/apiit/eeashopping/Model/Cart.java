@@ -17,6 +17,8 @@ public class Cart {
     private String pid;
     private int amount;
     private String uid;
+    private double price;
+    private String name;
 
     public String getCid() {
         return cid;
@@ -48,5 +50,21 @@ public class Cart {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

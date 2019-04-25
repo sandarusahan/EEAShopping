@@ -2,9 +2,7 @@ package com.apiit.eeashopping.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -14,13 +12,18 @@ public class Product {
     private String pId;
 
     private String pName;
-    private String pCategory;
+    @Column(name = "p_category")
+    private String categoryId;
     private String pDescription;
     private double pPrice;
     private int pQty;
-    private String pImg;
-    private boolean isActive;
+    @Column(name = "p_promotion")
+    private String promotionId;
 
+
+    private String pImg;
+
+    private boolean isActive;
 
     public String getpId() {
         return pId;
@@ -38,12 +41,12 @@ public class Product {
         this.pName = pName;
     }
 
-    public String getpCategory() {
-        return pCategory;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setpCategory(String pCategory) {
-        this.pCategory = pCategory;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getpDescription() {
@@ -70,13 +73,6 @@ public class Product {
         this.pQty = pQty;
     }
 
-    public String getImg() {
-        return pImg;
-    }
-
-    public void setImg(String img) {
-        pImg = img;
-    }
 
     public String getpImg() {
         return pImg;
@@ -92,5 +88,13 @@ public class Product {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(String  promotionId) {
+        this.promotionId = promotionId;
     }
 }

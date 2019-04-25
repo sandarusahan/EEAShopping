@@ -2,95 +2,129 @@ package com.apiit.eeashopping.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
+    @NotNull
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    public String UId;
+    public String uId;
 
-    public String FName;
-    public String LName;
-    public String Email;
-    public String Password;
-    public String Address;
-    public int Contact;
-    public String Role;
-    public String Image;
+    public String fName;
+    public String lName;
+    public String gender;
 
-    public String getUId() {
-        return UId;
+    @Column(unique = true)
+    @Email
+    public String email;
+
+    public String password;
+    public String address;
+    public int contact;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "uid"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    public Set<Role> role;
+
+    public String image;
+
+    public User() {
     }
 
-    public void setUId(String UId) {
-        this.UId = UId;
+    public User(User user) {
+        this.fName = user.fName;
+        this.lName = user.lName;
+        this.email = user.email;
+        this.gender = user.gender;
+        this.password = user.password;
+        this.address = user.address;
+        this.contact = user.contact;
+        this.role = user.role;
+        this.image = user.image;
     }
 
-    public String getFName() {
-        return FName;
+    public String getuId() {
+        return uId;
     }
 
-    public void setFName(String FName) {
-        this.FName = FName;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
-    public String getLName() {
-        return LName;
+    public String getfName() {
+        return fName;
     }
 
-    public void setLName(String LName) {
-        this.LName = LName;
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public int getContact() {
-        return Contact;
+        return contact;
     }
 
     public void setContact(int contact) {
-        Contact = contact;
+        this.contact = contact;
     }
 
-    public String getRole() {
-        return Role;
+    public Set<Role> getRole() {
+        return role;
     }
 
-    public void setRole(String role) {
-        Role = role;
+    public void setRole(Set<Role> role) {
+        this.role = role;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(String image) {
-        Image = image;
+        this.image = image;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
