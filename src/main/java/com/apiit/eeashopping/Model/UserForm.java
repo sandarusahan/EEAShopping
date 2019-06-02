@@ -1,8 +1,5 @@
 package com.apiit.eeashopping.Model;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import java.util.Set;
 
 public class UserForm {
 
@@ -14,7 +11,7 @@ public class UserForm {
 
     public String password;
     public String address;
-    public int contact;
+    public String contact;
 
 
     public String role;

@@ -1,5 +1,6 @@
 package com.apiit.eeashopping.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,8 +18,11 @@ public class Product {
     private String pDescription;
     private double pPrice;
     private int pQty;
-    @Column(name = "p_promotion")
-    private String promotionId;
+
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("products")
+    private Promotion promotion;
 
 
     private String pImg;
@@ -90,11 +94,11 @@ public class Product {
         isActive = active;
     }
 
-    public String getPromotionId() {
-        return promotionId;
+    public Promotion getPromotion() {
+        return promotion;
     }
 
-    public void setPromotionId(String  promotionId) {
-        this.promotionId = promotionId;
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 }

@@ -1,11 +1,13 @@
 package com.apiit.eeashopping.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Promotion {
@@ -27,6 +29,9 @@ public class Promotion {
 
     private Date endDate = handleEndDate();
 
+    @OneToMany(mappedBy = "promotion")
+    @JsonIgnoreProperties("promotion")
+    private Set<Product> products;
 
 
     public String getPromoid() {
@@ -75,6 +80,26 @@ public class Promotion {
 
     public void setEndedate(Date endedat) {
         this.endDate = endedat;
+    }
+
+    public String getPromoName() {
+        return promoName;
+    }
+
+    public void setPromoName(String promoName) {
+        this.promoName = promoName;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     Date handleEndDate() {

@@ -15,11 +15,17 @@ public class CartController {
     CartRepository cartRepository;
 
     @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<Cart> getAllCartItems(){
+    public @ResponseBody Iterable<Cart> getAllCartItems(){
         System.out.println("Fetching all cart items");
 
         return cartRepository.findAll();
+    }
+
+    @GetMapping(path = "/uid/{userId}")
+    public @ResponseBody Iterable<Cart> getAllCartItemsByUserId(@PathVariable String userId){
+        System.out.println("Fetching all cart items");
+
+        return cartRepository.findAllByUid(userId);
     }
 
     @PostMapping(path = "/add")

@@ -51,6 +51,13 @@ public class UserController {
         return userRepository.findById(uid).get();
     }
 
+    @GetMapping("check/{email}")
+    public Boolean isEmailExist(@PathVariable String email){
+        System.out.println("Checking email is available");
+
+        return userRepository.existsByEmail(email);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/user/all")
     public @ResponseBody Iterable<User> getAllUsers(){
