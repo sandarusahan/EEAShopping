@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping(path = "/admin/add")
+    @PostMapping(path = "/auth/add")
     public Category addNewCategory(@RequestBody String categoryName){
         Category category = new Category();
         category.setName(categoryName);
@@ -33,7 +33,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping(path = "/admin")
+    @PutMapping(path = "/auth")
     public Category updateCategory(@RequestBody Category category){
 
         categoryRepository.save(category);
@@ -43,7 +43,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/admin/{catid}")
+    @DeleteMapping("/auth/{catid}")
     public boolean deleteCategory(@PathVariable int catId){
 
         Optional<Category> c = categoryRepository.findById(catId);

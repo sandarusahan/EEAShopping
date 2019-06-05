@@ -27,7 +27,7 @@ public class PromotionController {
 
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping(path = "/admin/add")
+    @PostMapping(path = "/auth/add")
     public Promotion addNewPromotion(@RequestBody Promotion promotion){
 
         Promotion promo = promoRepository.save(promotion);
@@ -37,7 +37,7 @@ public class PromotionController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping(path = "/admin")
+    @PutMapping(path = "/auth")
     public Promotion updatePromotion(@RequestBody Promotion promotion){
 
 
@@ -47,7 +47,7 @@ public class PromotionController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/admin/{pid}")
+    @DeleteMapping("/auth/{pid}")
     public boolean deleteCategory(@PathVariable String pid){
 
         Optional p = promoRepository.findById(pid);

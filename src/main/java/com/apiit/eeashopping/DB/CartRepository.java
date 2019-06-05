@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CartRepository extends CrudRepository<Cart, String> {
 
-    Iterable<Cart> findAllByUid(String uid);
+    Iterable<Cart> findAllByUserEmail(String userEmail);
 }

@@ -24,6 +24,7 @@ public class Product {
     @JsonIgnoreProperties("products")
     private Promotion promotion;
 
+//    private Cart cart;
 
     private String pImg;
 

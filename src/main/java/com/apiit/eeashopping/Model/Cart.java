@@ -2,9 +2,7 @@ package com.apiit.eeashopping.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cart {
@@ -14,11 +12,12 @@ public class Cart {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String cid;
 
-    private String pid;
     private int amount;
-    private String uid;
-    private double price;
-    private String name;
+    private String userEmail;
+
+    @ManyToOne
+    @JoinColumn
+    private Product product;
 
     public String getCid() {
         return cid;
@@ -26,14 +25,6 @@ public class Cart {
 
     public void setCid(String cid) {
         this.cid = cid;
-    }
-
-    public String getpid() {
-        return pid;
-    }
-
-    public void setpId(String pId) {
-        this.pid = pId;
     }
 
     public int getAmount() {
@@ -44,27 +35,19 @@ public class Cart {
         this.amount = amount;
     }
 
-    public String getUid() {
-        return uid;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public double getPrice() {
-        return price;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

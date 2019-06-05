@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
@@ -24,14 +26,14 @@ public class SecurityAppConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
+        http.addFilterBefore(new CorsFilter() , ChannelProcessingFilter.class);
         http.authorizeRequests()
-                .antMatchers("**/public/**").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/user/**").permitAll()
-                .antMatchers("/user/**").authenticated()
-                .anyRequest().permitAll()
+                .antMatchers("/auth/**").authenticated().anyRequest().permitAll()
                 .and()
-                .formLogin().permitAll();
+                .httpBasic()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().csrf().disable();
 
     }
 
@@ -47,8 +49,9 @@ public class SecurityAppConfig extends WebSecurityConfigurerAdapter {
 
                     @Override
                     public boolean matches(CharSequence charSequence, String s) {
-                        System.out.println(charSequence + "sssss" + s);
+//                        System.out.println(charSequence + "sssss" + s);
                         return charSequence.toString().equals(s);
+//                        return true;
                     }
                 });
 

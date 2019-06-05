@@ -7,8 +7,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/user/cart")
+@RequestMapping(value = "/auth/cart")
 public class CartController {
 
     @Autowired
@@ -25,14 +26,14 @@ public class CartController {
     public @ResponseBody Iterable<Cart> getAllCartItemsByUserId(@PathVariable String userId){
         System.out.println("Fetching all cart items");
 
-        return cartRepository.findAllByUid(userId);
+        return cartRepository.findAllByUserEmail(userId);
     }
 
     @PostMapping(path = "/add")
     public Cart addNewItemToCart(@RequestBody Cart newCartItem){
         Cart cart = null;
         for(Cart cartItem : getAllCartItems()){
-            if(cartItem.getpid().equals(newCartItem.getpid()) && cartItem.getUid().equals(newCartItem.getUid())){
+            if(cartItem.getProduct().getpId().equals(newCartItem.getProduct().getpId()) && cartItem.getUserEmail().equals(newCartItem.getUserEmail())){
                 cart = cartItem;
             }
         }

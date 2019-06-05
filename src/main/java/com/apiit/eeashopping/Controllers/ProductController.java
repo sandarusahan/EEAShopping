@@ -16,7 +16,7 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping(path = "/admin/add")
+    @PostMapping(path = "/auth/add")
     public Product addNewProduct(@RequestBody Product product){
 
         productRepository.save(product);
@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping(path = "/admin")
+    @PutMapping(path = "/auth")
     public boolean updateProduct(@RequestBody Product product){
 
         Optional<Product> prod = productRepository.findById(product.getpId());
@@ -64,19 +64,19 @@ public class ProductController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/admin/{pid}")
+    @DeleteMapping("/auth/{pid}")
     public Boolean deleteProduct(@PathVariable String pid){
 
         boolean flag = false;
-        Product p = productRepository.findById(pid).get();
-        if(p.getpId() == null) {
+//        Product p = productRepository.findById(pid).get();
+//        if(p.getpId() == null) {
             productRepository.deleteById(pid);
-            System.out.println(p.getpName() + " is deleted");
+//            System.out.println(p.getpName() + " is deleted");
             flag = true;
 
-        }else {
-            flag = false;
-        }
+//        }else {
+//            flag = false;
+//        }
         return flag;
     }
 }

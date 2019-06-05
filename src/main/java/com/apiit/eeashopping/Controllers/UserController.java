@@ -2,6 +2,7 @@ package com.apiit.eeashopping.Controllers;
 
 import com.apiit.eeashopping.DB.RoleRepository;
 import com.apiit.eeashopping.DB.UserRepository;
+import com.apiit.eeashopping.Model.Auth;
 import com.apiit.eeashopping.Model.Role;
 import com.apiit.eeashopping.Model.User;
 import com.apiit.eeashopping.Model.UserForm;
@@ -23,7 +24,7 @@ public class UserController {
     @Autowired
     RoleRepository roleRepository;
 
-    @PostMapping("/register")
+    @PostMapping("/public/register")
     public User addNewUser(@RequestBody UserForm user){
 
         Role role = roleRepository.findById(user.role).get();
@@ -45,10 +46,32 @@ public class UserController {
         return newUser;
     }
 
+    @PostMapping("/public/authenticate")
+    public User findByEmail (@RequestBody Auth auth){
+        User user;
+        if(userRepository.existsByEmail(auth.getEmail())){
+            if(userRepository.findUserByEmail(auth.getEmail()).get().getPassword().equals(auth.getPassword())){
+                user = userRepository.findUserByEmail(auth.getEmail()).get();
+            }else {
+                user = null;
+            }
+        }else{
+            user = null;
+        }
+
+        return user;
+    }
+
     @GetMapping("/{uid}")
     public User getUser(@PathVariable String uid){
         System.out.println("Fetching all products");
         return userRepository.findById(uid).get();
+    }
+
+    @GetMapping("/email/{email}")
+    public User getUserByEmail (@PathVariable String email){
+        System.out.println("Fetching all products");
+        return userRepository.findUserByEmail(email).get();
     }
 
     @GetMapping("check/{email}")
@@ -59,14 +82,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/user/all")
+    @GetMapping("/auth/all")
     public @ResponseBody Iterable<User> getAllUsers(){
         System.out.println("Fetching all products");
         return userRepository.findAll();
     }
 
 
-    @PutMapping(path = "/user")
+    @PutMapping(path = "/auth")
     public User updateUser(@RequestBody User user){
 
         User newuser = userRepository.save(user);
