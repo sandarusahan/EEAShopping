@@ -20,17 +20,17 @@ public class SalesOrderController {
     }
 
     @GetMapping
-    public List<SalesOrder> findAllProducts(){
+    public List<SalesOrder> findAllOrders(){
         return salesOrderRepository.findAll();
     }
 
     @GetMapping(path = "/user/{userId}")
-    public Iterable<SalesOrder> findOrdersByUserId(@PathVariable int userId){
+    public Iterable<SalesOrder> findOrdersByUserId(@PathVariable String userId){
         return salesOrderRepository.findAllByUserId(userId);
     }
 
     @PostMapping(path = "/add")
-    public SalesOrder saveProduct(@RequestBody SalesOrder orderProduct){
+    public SalesOrder saveSalesOrder(@RequestBody SalesOrder orderProduct){
         System.out.println("method triggered");
         return salesOrderRepository.save(orderProduct);
     }
@@ -39,6 +39,11 @@ public class SalesOrderController {
     public SalesOrder updateProduct(@RequestBody SalesOrder orderProduct)
     {
         return salesOrderRepository.save(orderProduct);
+    }
+
+    @DeleteMapping(path="/user/{id}")
+    public void deleteProductByUser (@PathVariable String id){
+        salesOrderRepository.deleteAllByUserId(id);
     }
 
     @DeleteMapping(path="/{id}")

@@ -13,9 +13,9 @@ public class SalesOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
-    private int userId;
+    private String userId;
 
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     @CreationTimestamp
     private Timestamp orderDate;
     private String address;
@@ -33,11 +33,11 @@ public class SalesOrder {
         this.orderId = orderId;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -71,5 +71,6 @@ public class SalesOrder {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+        this.orderItems.forEach(orderItem -> orderItem.setSalesOrder(this));
     }
 }

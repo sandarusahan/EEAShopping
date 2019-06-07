@@ -68,7 +68,7 @@ public class UserController {
         return userRepository.findById(uid).get();
     }
 
-    @GetMapping("/email/{email}")
+    @GetMapping("auth/email/{email}")
     public User getUserByEmail (@PathVariable String email){
         System.out.println("Fetching all products");
         return userRepository.findUserByEmail(email).get();

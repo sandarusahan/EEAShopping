@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CartRepository extends CrudRepository<Cart, String> {
 
     Iterable<Cart> findAllByUserEmail(String userEmail);
+
+    void deleteAllByUserEmail(String userEmail);
 }

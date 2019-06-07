@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer> {
-    Iterable<SalesOrder> findAllByUserId(int userId);
+    Iterable<SalesOrder> findAllByUserId(String userId);
+
+    void deleteAllByUserId(String userId);
 }

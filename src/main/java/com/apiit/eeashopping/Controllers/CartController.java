@@ -5,6 +5,7 @@ import com.apiit.eeashopping.Model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
@@ -74,10 +75,11 @@ public class CartController {
         return cartRepository.findAll();
     }
 
-    @DeleteMapping("/del")
-    public Iterable<Cart> deleteCartItems(@RequestBody Iterable<Cart> cartItems) {
+    @Transactional
+    @DeleteMapping("/user/{email}")
+    public void deleteCartItems(@PathVariable String email ) {
 
-        cartRepository.deleteAll(cartItems);
-        return cartRepository.findAll();
+        cartRepository.deleteAllByUserEmail(email);
+
     }
 }

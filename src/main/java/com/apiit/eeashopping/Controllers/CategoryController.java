@@ -43,7 +43,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/auth/{catid}")
+    @DeleteMapping("/auth/{catId}")
     public boolean deleteCategory(@PathVariable int catId){
 
         Optional<Category> c = categoryRepository.findById(catId);
